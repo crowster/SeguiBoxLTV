@@ -110,6 +110,7 @@ public class AlgorithmHashDaoImpl implements AlgorithmHashDao {
             cstmt.setString("AlgorithmName", algorithmName);
             cstmt.setString("AlgorithmDescription", algorithmDescription);
             // cstmt.setInt("Secure", secure);
+            System.out.println("desde hash dao impl valor activo? "+isActive);
             cstmt.setBoolean("IsActive", isActive);
             rsl = cstmt.executeQuery();
         } catch (SQLException e) {
@@ -179,6 +180,7 @@ public class AlgorithmHashDaoImpl implements AlgorithmHashDao {
                 item.setExpirationDate(rsl.getDate("ExpirationDate"));
                 item.setAlgorithmName(rsl.getString("AlgorithmName"));
                 item.setAlgorithmDescription(rsl.getString("AlgorithmDescription"));
+                item.setActive(rsl.getBoolean("IsActive"));
                 item.setOid(rsl.getString("Oid"));
                 item.setBinOid(rsl.getBytes("BinOid"));
                 algorithmHash.add(item);

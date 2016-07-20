@@ -8,8 +8,10 @@ package com.seguriboxltv.backing;
 import com.seguriboxltv.core.domain.AlgorithmAsymmetric;
 import com.seguriboxltv.core.service.AlgorithmAsymmetricService;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +33,34 @@ public class AlgorithmAsyBean extends AlgorithmAsyBeanBase {
             list = algorithmAsymmetricService.GetAll();
         } catch (Exception e) {
             e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error",e.getMessage()));
         }
         return list;
+    }
+    
+    public String goToEdit(AlgorithmAsymmetric algortithmAsy){
+    
+        System.out.println("entro al edit");
+        this.setAlgorihmAsy(algortithmAsy);
+    
+        
+        
+        return "adminAsimetricAlgorithm";
+    }
+    
+    public String update(int id,String algorithmName,String algorithmDes,int secure,boolean isActive){
+        System.out.println("entro al update");
+        try {
+            algorithmAsymmetricService.Save(id, "gerhl92",GetIp(), algorithmName, algorithmDes, secure, isActive);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Info","El registro se actualizo correctamente"));
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error",e.getMessage()));
+           
+            
+        }
+        return "adminAsimetricAlgorithms";
     }
 }

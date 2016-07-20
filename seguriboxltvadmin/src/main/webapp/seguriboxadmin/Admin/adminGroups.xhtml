@@ -36,12 +36,12 @@
                                 <h:form>
                                     <div class="panel-body">
                                         <div class="table-responsive">
-
+                                           #{groupBean.group.profileTypeStr}
                                             <b:dataTable value="#{groupBean.groups}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="400px" >
-                                                <b:dataTableColumn label="ID Grupo">#{item.groupId}</b:dataTableColumn>
-                                                <b:dataTableColumn label="Nombre del Grupo">#{item.groupName}</b:dataTableColumn>
-                                                <b:dataTableColumn order="asc" label="Descripcioón">#{item.description}</b:dataTableColumn>
-                                                <b:dataTableColumn label="Activo">#{item.isActive}</b:dataTableColumn>
+                                                <b:dataTableColumn label="ID">#{item.groupId}</b:dataTableColumn>
+                                                <b:dataTableColumn label="Nombre Grupo">#{item.groupName}</b:dataTableColumn>
+                                                <b:dataTableColumn order="asc" label="Tipo usuario">#{item.profileTypeStr}</b:dataTableColumn>
+                                                <b:dataTableColumn label="Fecha de registro">#{item.referenceDate}</b:dataTableColumn>
                                                 <h:column >
                                                     <f:facet name="header">
                                                         <h:outputText value="Editar"></h:outputText>

@@ -19,7 +19,37 @@ public class AlgorithmSignSymm {
     private byte[] asymmBin;
     private boolean isActive;
     private int a;
+    private String hashName;
+    private String asymetricName;
+    private String status;
 
+    public String getHashName() {
+        return hashName;
+    }
+
+    public void setHashName(String hashName) {
+        this.hashName = hashName;
+    }
+
+    public String getAsymetricName() {
+        return asymetricName;
+    }
+
+    public void setAsymetricName(String asymetricName) {
+        this.asymetricName = asymetricName;
+    }
+
+    public String getStatus() {
+        String sts;
+        if(isActive==true){
+            sts="Activo";
+        }else{
+            sts="Desactivado";
+        }
+        return sts;
+    }
+
+    
     public int getAlgorithmSignId() {
         return algorithmSignId;
     }

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Date;
 
 //Clase dominio que representa las propiedades de la tabla AlgorithmHash
-
 public class AlgorithmHash {
 
     int algorithmHashId;
@@ -21,9 +20,24 @@ public class AlgorithmHash {
     int Secure;
     boolean isActive;
     private String binOidToString;
+    private String isActiveStr;
 
     public AlgorithmHash() {
     }
+
+    public String getIsActiveStr() {
+        
+        String  ia="";
+        
+        if(isActive==true){
+            ia="Activo";
+        }else{
+            ia="Desactivado";
+        }
+        return ia;
+    }
+    
+    
 
     public int getAlgorithmHashId() {
         return algorithmHashId;
@@ -125,5 +139,9 @@ public class AlgorithmHash {
         return Arrays.toString(binOid);
     }
 
-  
+    @Override
+    public String toString() {
+        return "AlgorithmHash{" + "algorithmHashId=" + algorithmHashId + ", criptoModuleId=" + criptoModuleId + ", dateReference=" + dateReference + ", expirationDate=" + expirationDate + ", algorithmName=" + algorithmName + ", algorithmDescription=" + algorithmDescription + ", oid=" + oid + ", binOid=" + binOid + ", bits=" + bits + ", bytes=" + bytes + ", Secure=" + Secure + ", isActive=" + isActive + ", binOidToString=" + binOidToString + '}';
+    }
+
 }

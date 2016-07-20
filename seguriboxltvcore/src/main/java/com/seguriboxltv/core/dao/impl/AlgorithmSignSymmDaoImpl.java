@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.seguriboxltv.core.dao.AlgorithmSignSymmDao;
 import com.seguriboxltv.core.domain.AlgorithmSignSymm;
+import java.sql.SQLException;
 
 //Clase que implementa metodos para la persistencia en la tabla de AlgorithmSignSymm
 @Repository
@@ -91,17 +92,21 @@ public class AlgorithmSignSymmDaoImpl implements AlgorithmSignSymmDao {
     @Override
     public void save(AlgorithmSignSymm algorithmSSS, String userName, String hostName) throws Exception {
         sql = "{call  AlgorithmSignSymmSave(?,?,?,?,?,?)}";
-
+        System.out.println("com.seguriboxltv.core.dao.impl.AlgorithmSignSymmDaoImpl.save() :"+algorithmSSS.getAlgorithmName() );
         try {
             conn = dataSource.getConnection();
 
             cstmt = conn.prepareCall(sql);
+            
             cstmt.setString("UserName", userName);
             cstmt.setString("HostName", hostName);
             cstmt.setString("AlgorithmName", algorithmSSS.getAlgorithmName());
-            cstmt.setString("AlgorithmDescritpion", algorithmSSS.getAlgorithmDescription());
-            // cstmt.setBoolean("IsActive", algorithmSSS.geti);
-        } catch (Exception e) {
+            cstmt.setString("AlgorithmDescription", algorithmSSS.getAlgorithmDescription());
+            cstmt.setBoolean("IsActive", algorithmSSS.isIsActive());
+            cstmt.executeQuery();
+        } catch (SQLException e) {
+            throw e;
+        }catch(Exception e){
             throw e;
         }
     }
@@ -166,6 +171,10 @@ public class AlgorithmSignSymmDaoImpl implements AlgorithmSignSymmDao {
                 item.setBinOid(rsl.getBytes("BinOid"));
                 item.setHashBin(rsl.getBytes("HashBin"));
                 item.setAsymmBin(rsl.getBytes("AsymmBin"));
+                item.setAsymetricName(rsl.getString("AsymetricName"));
+                item.setHashName(rsl.getString("HashName"));
+                item.setIsActive(rsl.getBoolean("IsActive"));
+                
                 result.add(item);
             }
         } catch (Exception e) {

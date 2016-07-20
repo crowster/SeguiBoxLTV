@@ -22,16 +22,20 @@ public class Group {
     }
 
     public String getProfileTypeStr() {
-        return profileTypeStr;
+        String pt;
+
+        if (profileType == 1) {
+            pt = "Administrador";
+        } else {
+
+            pt = "Usuario";
+        }
+
+        System.out.println("el valor es el siguiente:" + pt);
+        return pt;
     }
 
-    public void setProfileTypeStr() {
-      
-
-        System.out.println("el valor es el siguiente:" );
-
-        this.profileTypeStr = "Adminsas";
-    }
+    
 
     public short getGroupId() {
         return groupId;

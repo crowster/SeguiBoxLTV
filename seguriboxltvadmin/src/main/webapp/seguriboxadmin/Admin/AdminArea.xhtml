@@ -24,7 +24,7 @@
                                 <p:growl id="growl" showDetail="true" sticky="false" life="5000" />  
                                 
                                 <b:messages/> 
-                                <b:panel title="Agregar área" look="default" collapsible="false">
+                                <b:panel title="#{areaBean.labelMessage} área" look="default" collapsible="false">
 
                                     
                                     <div class="form-group">
@@ -35,11 +35,11 @@
                                                 <i class="glyphicon glyphicon-pencil"></i>
                                             </span>
                                             
-                                            <h:inputText p:placeholder="Nombre del área" id="area" styleClass="form-control" value="#{areaBeanModel.area.areaName}" required="true" requiredMessage="El campo nombre es requerido"/>
+                                            <h:inputText p:placeholder="Nombre del área" id="area" styleClass="form-control" value="#{areaBean.area.areaName}" required="true" requiredMessage="El campo nombre es requerido"/>
                                         </div>
                                     </div>
                                     <b:message for="activo"/>
-                                    <h:selectBooleanCheckbox id="activo" value="#{areaBeanModel.area.isActive}" converter="javax.faces.Boolean"/>Activo
+                                    <h:selectBooleanCheckbox id="activo" value="#{areaBean.area.isActive}" converter="javax.faces.Boolean"/>Activo
                                     <div>
 
                                         <b:commandButton   value="Guardar" look="primary"  style-class="center-block" action="#{areaBean.create()}" update="@form" />

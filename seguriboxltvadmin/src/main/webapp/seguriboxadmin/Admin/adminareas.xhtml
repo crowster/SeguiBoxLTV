@@ -39,7 +39,7 @@
                                             <b:dataTable value="#{areaBean.areas}" var="item" responsive="true" lang="es" fixedHeader="true" scroll-size="400px">
                                                 <b:dataTableColumn label="ID Area">#{item.areaId}</b:dataTableColumn>
                                                 <b:dataTableColumn label="Nombre del Area">#{item.areaName}</b:dataTableColumn>
-                                                <b:dataTableColumn order="asc" label="Activo">#{item.isActive}</b:dataTableColumn>
+                                                <b:dataTableColumn order="asc" label="Estatus">#{item.isActive}</b:dataTableColumn>
                                                 <h:column >
                                                     <f:facet name="header">
                                                         <h:outputText value="Editar"></h:outputText>

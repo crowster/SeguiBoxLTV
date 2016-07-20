@@ -22,18 +22,7 @@ public class AreaBeanModel {
     /**
      * Creates a new instance of AreaBeanModel
      */
-    private Area area = new Area();
 
-    public AreaBeanModel() {
-    }
-
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
-    }
 
     
 }

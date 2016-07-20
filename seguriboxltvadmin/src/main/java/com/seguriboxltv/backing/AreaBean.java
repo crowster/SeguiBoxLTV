@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ManagedBean
 @RequestScoped
-public class AreaBean {
+public class AreaBean extends AreaBeanBase {
 
     @Autowired
     private AreaService areaService;
@@ -34,25 +34,7 @@ public class AreaBean {
 
     List<Area> list = null;
 
-    private boolean isEdit;
-
     public AreaBean() {
-    }
-
-    public boolean isIsEdit() {
-        return isEdit;
-    }
-
-    public void setIsEdit(boolean isEdit) {
-        this.isEdit = isEdit;
-    }
-
-    public AreaBeanModel getArea() {
-        return area;
-    }
-
-    public void setArea(AreaBeanModel area) {
-        this.area = area;
     }
 
     public void create() {
@@ -60,12 +42,12 @@ public class AreaBean {
         //System.out.println("hola+:" + area.getArea().getAreaName());
         try {
 
-            int id = areaService.Save(area.getArea(), GetIp(), "gerhl92");
-            
-            System.out.println("EL VALOR DEL NAME ES:" + area.getArea().getAreaName());
+            int id = areaService.Save(getArea(), GetIp(), "gerhl92");
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "El area  : " + area.getArea().getAreaName() + " fue agregado satisfactoriamente"));
-            area.setArea(new Area());
+            System.out.println("EL VALOR DEL NAME ES:" + getArea().getAreaName());
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "El area  : " + getArea().getAreaName() + " fue agregado satisfactoriamente"));
+            setArea(new Area());
         } catch (Exception e) {
             e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", e.getMessage()));
@@ -88,10 +70,10 @@ public class AreaBean {
 
     public void delete(Area area) {
 
-        System.out.println("entro a delete "+area.toString());
+        System.out.println("entro a delete " + area.toString());
         try {
             areaService.Delete(area.getAreaId(), GetIp(), "gerhl92");
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info","El registro fue borrado satisfactoriamente"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "El registro fue borrado satisfactoriamente"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,19 +85,26 @@ public class AreaBean {
 
     public String goToArea(Area area) {
 
-        this.area.setArea(area);
-        this.isEdit = true;
+        this.setArea(area);
+        super.setEdit(true);
+        System.out.println("el valor de label al editar es: " + isEdit());
+
         return "AdminArea";
     }
 
-    private String GetIp() {
+    public String getLabelMessage() {
 
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String ipAddress = request.getHeader("X-FORWARDED-FOR");
-        if (ipAddress == null) {
-            ipAddress = request.getRemoteAddr();
+        if (isEdit() == true) {
+
+            setLabel("Editar");
+            setEdit(false);
+        } else {
+            setLabel("Agregar");
+            setArea(new Area());
         }
 
-        return ipAddress;
+        return getLabel();
+
     }
+
 }
